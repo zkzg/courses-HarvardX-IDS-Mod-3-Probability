@@ -1,0 +1,65 @@
+---
+title: The Addition Rule
+title_meta: Chapter 3
+description: In this chapter, you will learn about the addition rule and the Monty Hall problem.
+---
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 1. The Cavs and the Warriors
+Two teams, say the Cavs and the Warriors, are playing a seven game championship series. The first to win four games therefore wins the series. The teams are equally good so they each have a 50-50 chance of winning each game. If the Cavs lose the first game, what is the probability that they win the series?
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 2. The Cavs and the Warriors - Monte Carlo
+Confirm the results of the previous question with a Monte Carlo simulation.
+*** =solution
+```{r}
+B <- 100000
+results <- replicate(B, {
+  cavs_wins <- sample(c(0,1), 6, replace = TRUE)
+  sum(cavs_wins)>=4 
+})
+mean(results)
+```
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 3. A and B play a series - part 1
+Two teams, $A$ and $B$, are playing a seven series game series. Team $A$ is better than team $B$ and has a $p>0.5$ chance of winning each game. Give a value $p$, the probability of winning the series for the underdog team $B$ can be computed with the following function based on a Monte Carlo simulation:
+
+```{r}
+prob_win <- function(p){
+  B <- 10000
+  result <- replicate(B, {
+    b_win <- sample(c(1,0), 7, replace = TRUE, prob = c(1-p, p))
+    sum(b_win)>=4
+    })
+  mean(result)
+}
+```
+***= instructions
+- Use the function `sapply` to compute the probability, call it `Pr` of winning for `p <- seq(0.5, 0.95, 0.025)`.
+- Then plot the result `plot(p, prob)`.
+
+***= solution
+p <- seq(0.5, 0.95, 0.025)
+Pr <- sapply(p, prob_win)
+plot(p, Pr)
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 4. A and B play a series - part 2
+Repeat the previous exercise, but now keep the probability fixed at `p <- 0.75` and compute the probability for different series lengths. Best of 1 game, 3 games, 5 games, .... Specifically, `N <- seq(1, 25, 2)`. Hint: use this function now.
+    ```{r}
+    prob_win <- function(N, p=0.75){
+      B <- 10000
+      result <- replicate(B, {
+        b_win <- sample(c(1,0), N, replace = TRUE, prob = c(1-p, p))
+        sum(b_win)>=(N+1)/2
+        })
+      mean(result)
+    }
+    ```
+    
+***= solution
+```{r, eval=FALSE}
+N <- seq(1, 25, 2)
+Pr<- sapply(N, prob_win)
+plot(N, Pr)
