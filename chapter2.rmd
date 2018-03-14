@@ -1,0 +1,13 @@
+---type:MultipleChoiceExercise lang:r xp:50 skills:1
+## Exercise 9. Independence
+Two events $A$ and $B$ are independent if $\mbox{Pr}(A \mbox{ and } B) = \mbox{Pr}(A) P(B)$. Under which situation are the draws independent?
+
+A. You don't replace the draw. B. You replace the draw. C. Neither D. Both
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 10. Sampling with replacement part 2
+Say you’ve drawn 5 balls from the box, with replacement, and all have been yellow. What is the probability that the next one is yellow?
+
+---type:NormalExercise lang:r xp:100 skills:1
+## Exercise 11. Sampling with replacement part 2 - generalized
+Write exercise that has coding to calculate this probability in general
