@@ -1,0 +1,51 @@
+Create a random variable $S$ with the earnings of your bank if you give out 10,000 loans, the default rate is 0.3, and you lose $200,000 in each foreclosure. Hint: use code we showed in the previous section, but change the parameters.
+n <- 10000
+loss_per_foreclosure <- -200000
+p <- 0.03 
+defaults <- sample( c(0,1), n, prob=c(1-p, p), replace = TRUE)
+S <- sum(defaults * loss_per_foreclosure)
+Run a Monte Carlo simulation with 10,000 outcomes for $S$. Make a histogram of the results.
+B <- 10000
+S <- replicate(B, {
+    defaults <- sample( c(0,1), n, prob=c(1-p, p), replace = TRUE) 
+  sum(defaults * loss_per_foreclosure)
+})
+hist(S)
+What is the expected value of $S$:
+n*(p*loss_per_foreclosure + (1-p)*0)
+What is the standard error of $S$?
+sqrt(n)*abs(loss_per_foreclosure)*sqrt(p*(1-p))
+Suppose we give out loans for $180,000. What should the interest rate be so that our expected value is 0?
+Solution: $$ lp + x(1-p) = 0 $$
+
+This implies that $x$ is:
+
+- loss_per_foreclosure*p/(1-p)
+and our interest rate:
+
+- p*loss_per_foreclosure/(1-p) / 180000
+(Harder) What should the interest rate be so that the chance of losing money is 1 in 20? In math notation, what should the interest rate be so that $\mbox{Pr}(S<0) = 0.05$ ?
+Solution $$ \mbox{Pr}\left(\frac{S - \mbox{E}[S]}{\mbox{SE}[S]} < \frac{ - \mbox{E}[S]}{\mbox{SE}[S]}\right) $$
+
+$$ \mbox{Pr}\left(Z < \frac{- { lp + x(1-p)}n}{(x-l) \sqrt{np(1-p)}}\right) = 0.01 $$
+
+Let $z=$qnorm(0.05) gives us the value of $z$ for which:
+
+$$ \mbox{Pr}(Z \leq z) = 0.05 $$
+
+This means that right side of the complicated equation must be $z$=qnorm(0.01):
+
+$$ \frac{- { lp + x(1-p)}N}{(x-l) \sqrt{Np(1-p)}} = z $$
+
+We solve for $x$:
+
+$$ x = - l \frac{ np - z \sqrt{np(1-p)}}{N(1-p) + z \sqrt{np(1-p)}}$$
+
+which is:
+
+l <- loss_per_foreclosure
+z <- qnorm(0.05)
+x <- -l*( n*p - z*sqrt(n*p*(1-p)))/ ( n*(1-p) + z*sqrt(n*p*(1-p)))
+x/180000
+If the bank wants to minimize the probabilities of losing money, which of the following does not make interest rates go up?
+A. A smaller pool of loans. B. A larger probability of default. C. A smaller required probability of losing money. D. The number of Monte Carlo simulations.
