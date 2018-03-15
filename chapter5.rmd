@@ -1,0 +1,22 @@
+In American Roulette you can also bet on green. Remember there are 18 reds, 18 blacks and 2 greens (0 and 00). What are the chances the green comes out?
+2/38 = 1/19
+The payout for winning on green is $17 dollars. This means that if you bet a dollar and it lands on green you get $17. Create a sampling model using sample to simulate the random variable $X$ for your winnings. Hint: see the exampe below for how it should look like when betting on red.
+
+X <- sample(c(1,-1), 1, prob = c(9/19, 10/19))
+X <- sample(c(17,-1), 1, prob = c(1/19, 18/19))
+Compute the expected value of $X$.
+
+17*1/19 + -1*18/19
+Compute the standard error of $X$.
+
+(17 - -1)*sqrt(1/19*18/19)
+Now create a random variable $S$ that is the sum of your winnings after betting on green 1000 times. Hint: change the argument size and replace in your answer to question 2. Start your code by setting the seed to 1 with set.seed(1).
+
+    set.seed(1)
+    n <- 1000
+    X <- sample(c(17,-1), size = n, replace = TRUE, prob = c(1/19, 18/19))
+    S <- sum(X)
+What is the expected value of $S$?
+n * (17*1/19 + -1*18/19)
+What is the standard error of $S$?
+sqrt(n) * (17 - -1)*sqrt(1/19*18/19)
