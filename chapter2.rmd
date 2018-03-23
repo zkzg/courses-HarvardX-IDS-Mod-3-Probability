@@ -4,48 +4,291 @@ title_meta: Chapter 2
 description: In this chapter, you will learn about independence, conditional probability, and the multiplication rule.
 ---
 
----type:MultipleChoiceExercise lang:r xp:50 skills:1
 ## Exercise 1. Independence
-Two events $A$ and $B$ are independent if $\mbox{Pr}(A \mbox{ and } B) = \mbox{Pr}(A) P(B)$. Under which situation are the draws independent?
 
-A. You don't replace the draw. B. You replace the draw. C. Neither D. Both
+```yaml
+type: MultipleChoiceExercise
+lang: r
+xp: 100
+skills: 1
+```
+Imagine you draw two balls from a box containing colored balls. You either replace the first ball before you draw the second or you leave the first ball out of the box when you draw the second ball. 
 
----type:NormalExercise lang:r xp:100 skills:1
+Under which situation are the two draws independent of one another?
+
+Remember that two events $A$ and $B$ are independent if $\mbox{Pr}(A \mbox{ and } B) = \mbox{Pr}(A) P(B)$.
+
+`@instructions`
+- You don't replace the first ball before drawing the next.
+- You do replace the first ball before drawing the next.
+- Neither situation describes independent events.
+- Both situations describe independent events.
+
+`@hint`
+Sampling without replacement changes the number of balls remaining in the box when the second ball is drawn.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sct`
+```{r}
+msg1 = "Try again! The box contains fewer balls during the second draw if you don't replace the drawn ball."
+msg2 = "Well done. Proceed to the next exercise."
+msg3 = "One of the situations describes independent events."
+msg4 = "One of these situations describes an event where the second draw depends on the outcome of the first."
+test_mc(correct = 2, feedback_msgs = c(msg1,msg2,msg3,msg4))
+```
+
 ## Exercise 2. Sampling with replacement
-Say you’ve drawn 5 balls from the a box that has 3 cyan balls, 5 magenta balls, and 7 yellow balls, with replacement, and all have been yellow. What is the probability that the next one is yellow?
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
+Say you’ve drawn 5 balls from the a box that has 3 cyan balls, 5 magenta balls, and 7 yellow balls, with replacement, and all have been yellow.
+
+What is the probability that the next one is yellow?
+
+`@instructions`
+- Assign the variable 'p_yellow' as the probability of choosing a yellow ball on the first draw.
+- Using the variable 'p_yellow', calculate the probability of choosing a yellow ball on the sixth draw.
+
+`@hint`
+- If the proportion of yellow balls in the box doesn't change, the probability of drawing a yellow ball does not change.
+- Use the multiplication rule to determine the probability of multiple events.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign the variable 'p_yellow' as the probability that a yellow ball is drawn from the box.
+
+# Using the variable 'p_yellow', calculate the probability of drawing a yellow ball on the sixth draw. Print this value to the console.
+
+```
+
+`@solution`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign the variable 'p_yellow' as the probability that a yellow ball is drawn from the box.
+p_yellow <- yellow/(cyan+magenta+yellow)
+
+# Using the variable 'p_yellow', calculate the probability of drawing a yellow ball on the sixth draw. Print this value to the console.
+p_yellow
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p_yellow", incorrect_msg = "Make sure that you use `p_yellow` as your variable name for the probability of not choosing a yellow ball from the box.")
+test_output_contains("0.4666667", incorrect_msg = "You are not providing a calculation that gives the correct answer. The probability of choosing a yellow ball does not depend on subsequent draws when balls are replaced after each draw.")
+success_msg("Great! Let's work on another problem.")
+```
 
 ---type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 3. Sampling with replacement - generalized
 Write exercise that has coding to calculate this probability in general
 
----type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 4. Rolling a die
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
 If you roll a 6-sided die six times, what is the probability of not seeing a 6?
 
----type:NormalExercise lang:r xp:100 skills:1
-## Exercise 5. Probability the Celtics win a game
-Two teams, say the Celtics and the Cavs, are playing a seven game series. The Cavs are a better team and have a 60% chance of winning each game. What is the probability that the Celtics win at least one game?
+`@instructions`
+- Assign the variable 'p_no6' as the probability of not seeing a 6 on a single roll.
+- Calculate the probability of not seeing a 6 on six rolls.
 
----type:NormalExercise lang:r xp:100 skills:1
+`@hint`
+- The probability of rolling a 6 does not change from roll to roll.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+# Assign the variable 'p_no6' as the probability of not seeing a 6 on a single roll.
+
+
+# Calculate the probability of not seeing a 6 on six rolls.
+
+```
+
+`@solution`
+```{r}
+# Assign the variable 'p_no6' as the probability of not seeing a 6 on a single roll.
+p_no6 <- 1 - (1/6)
+
+# Calculate the probability of not seeing a 6 on six rolls.
+p_no6^6
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p_no6", incorrect_msg = "Make sure that you use `p_no6` as your variable name for the probability of rolling any number other than six on a 6-sided die.")
+test_output_contains("0.334898", incorrect_msg = "You are not providing a calculation that gives the correct answer. The probability of rolling any number other than a six does not change from roll to roll.")
+success_msg("Great! Let's work on another problem.")
+```
+
+## Exercise 5. Probability the Celtics win a game
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+Two teams, say the Celtics and the Cavs, are playing a seven game series. The Cavs are a better team and have a 60% chance of winning each game. 
+
+What is the probability that the Celtics win at least one game? Remember that the Celtics must win one of the first four games, or the series will be over!
+
+`@instructions`
+- Calculate the probability that the Cavs will win the first four games of the series.
+- Calculate the probability that the Celtics win at least one game in the first four games of the series.
+
+`@hint`
+- The probability that the Cavs win a game does not change throughout the series, regardless of previous outcomes.
+- If the Cavs don't win all four games, then the Celtics win at least one game.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+# Assign the variable `p_cavs_win4` as the probability that the Cavs will win the first four games of the series.
+
+
+# Using the variable `p_cavs_win4`, calculate the probability that the Celtics win at least one game in the first four games of the series.
+
+
+```
+
+`@solution`
+```{r}
+# Assign the variable `p_cavs_win4` as the probability that the Cavs will win the first four games of the series.
+p_cavs_win4 <- 0.6^4
+
+# Using the variable `p_cavs_win4`, calculate the probability that the Celtics win at least one game in the first four games of the series.
+1-p_cavs_win4
+
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p_cavs_win4", incorrect_msg = "Make sure that you use `p_cavs_win4` as your variable name for the probability of the Cavs winning four games in a row.")
+test_output_contains("0.8704", incorrect_msg = "You are not providing a calculation that gives the correct answer. The probability of the Celtics winning at least one of the four games and the probability that the Cavs win all four games add up to 1.")
+success_msg("Great! Let's work on another problem.")
+```
+
 ## Exercise 6. Monte Carlo simulation for Celtics winning a game
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
 Create a Monte Carlo simulation to confirm your answer to the previous problem. Use `B <- 10000` simulations.
 
-Hint: Use the following code to generate the results of the first four games:
+`@instructions`
+- Use the `replicate` function to replicate the sample code for `B <- 10000` simulations.
+- Use the `any` to indicate if any of the values in each simulated four-game series contains at least one win for the Celtics.
+- Use the `mean` function to find the proportion of simulations that contain at least one win for the Celtics out of four games. 
+
+`@hint`
+- To use the `replicate` function, provide the number of replications and the code you want to be replicated. You can use {} to include multiple expressions that you'd like to be repeated.
+
 ```{r}
-celtic_wins <- sample(c(0,1), 4, replace = TRUE, prob = c(0.6, 0.4))
-```
-The Celtics must win one of these 4 games, or the series will be over!
-*** =sample_code
-```{r}
-celtic_wins <- sample(c(0,1), 4, replace = TRUE, prob = c(0.6, 0.4))
+results <- replicate(number_of_times_to_replicate, {
+  first_command_to_run
+  second_command_to_run
+})
 ```
 
-*** =solution
+- You can `any` function to identify instances where any game in a simulated series contains a win.
+
 ```{r}
+any(celtic_wins==1)
+```
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+# This line of code simulates four random games where the Celtics either lose (== 0) or win (== 1). Each game is independent of other games, as indicated by `replace = TRUE`.
+celtic_wins <- sample(c(0,1), 4, replace = TRUE, prob = c(0.6, 0.4))
+
+# The variable 'B' specifies the number of times we want the simulation to run. Let's run the Monte Carlo simulation 10,000 times.
 B <- 10000
+
+# Use the `set.seed` function to make sure your answer matches the expected result after random sampling.
+set.seed(1)
+
+# Create an object called `results` that replicates the sample code for `B` iterations and tallies the number of simulated series that contain at least one win for the Celtics.
+
+
+
+
+# Calculate the frequency out of B iterations that the Celtics won at least one game. Print your answer to the console. 
+
+
+```
+
+`@solution`
+```{r}
+# This line of code simulates four random games where the Celtics either lose (0) or win (1). Each game is independent of other games.
+celtic_wins <- sample(c(0,1), 4, replace = TRUE, prob = c(0.6, 0.4))
+
+# The variable 'B' specifies the number of times we want the simulation to run. Let's run the Monte Carlo simulation 10,000 times.
+B <- 10000
+
+# Use the `set.seed` function to make sure your answer matches the expected result after random sampling.
+set.seed(1)
+
+# Create an object called `results` that replicates the sample code for `B` iterations and tallies the number of simulated series that contain at least one win for the Celtics.
 results <- replicate(B, {
   celtic_wins <- sample(c(0,1), 4, replace = TRUE, prob = c(0.6, 0.4))
-  if(any(celtic_wins==1)) return(TRUE) else return(FALSE)
+  any(celtic_wins==1)
 })
+
+# Calculate the frequency out of B iterations that the Celtics won at least one game. Print your answer to the console. 
 mean(results)
+```
+
+`@sct`
+```{r}
+test_error()
+test_output_contains("any(celtic_wins==1)", incorrect_msg = "Make sure you use the `any` function on the `celtic_wins` object to find instances where the Celtics won at least one simulated game.")
+test_output_contains("mean(results)", incorrect_msg = "Make sure you use the `mean` function on the `results` object.")
+test_output_contains("0.8757", incorrect_msg = "You are not providing a calculation that gives the correct answer. Make sure you've executed the `set.seed(1)` command and have replicated the sample code over 10,000 iterations.")
+success_msg("Great work!")
 ```
