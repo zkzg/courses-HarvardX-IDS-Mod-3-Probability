@@ -3,33 +3,268 @@ title: Introduction to Discrete Probability
 title_meta: Chapter 1
 description: In this chapter, you will learn about the fundamentals of discrete probability.
 ---
----type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 1. Probability of cyan
-One ball will be drawn at random from a box containing: 3 cyan balls, 5 magenta balls, and 7 yellow balls. What is the probability that the ball will be cyan?
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
+One ball will be drawn at random from a box containing: 3 cyan balls, 5 magenta balls, and 7 yellow balls. 
+
+What is the probability that the ball will be cyan?
+
+`@instructions`
+- Define a variable `p` as the probability of choosing a cyan ball from the box.
+- Print the value of `p`.
+
+`@hint`
+- Calculate the proportion of balls in the box that are cyan and assign that value to the variable `p`.
+- To print the contents of a variable, write the variable name in a new line of code.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign a variable `p` as the probability of choosing a cyan ball from the box
+
+
+# Print the variable `p` to the console
+
+
+```
+
+`@solution`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign a variable `p` as the probability of choosing a cyan ball from the box
+p <- cyan/(cyan+magenta+yellow)
+
+# Print the variable `p` to the console
+p
+
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p", incorrect_msg = "Make sure that you use `p` as your variable name and that you have assigned the correct value to `p`.")
+test_output_contains("0.2", incorrect_msg = "You are not providing a calculation that gives the correct answer. The probability of choosing a cyan ball is equal to the proportion of cyan balls in the box.")
+success_msg("Good job! Let's work on a similar problem.")
+```
 
 ---type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 2. Probability of cyan - generalized
 Write exercise that has coding to calculate this probability in general
 
----type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 3. Probability of not cyan
-What is the probability that the ball will not be cyan?
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
+We defined the variable `p` as the probability of choosing a cyan ball. 
+
+What is the probability that the ball you draw from the box will NOT be cyan?
+
+`@instructions`
+- Using the probability of choosing a cyan ball, `p`, calculate the probability of choosing any other ball.
+
+`@hint`
+- The sum of all possibilities is 1.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign a variable `p` as the probability of choosing a cyan ball from the box
+p <- cyan/(cyan+magenta+yellow)
+
+# Using variable `p`, calculate the probability of choosing any ball from the box that is not cyan
+
+
+```
+
+`@solution`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# Assign a variable `p` as the probability of choosing a cyan ball from the box
+p <- cyan/(cyan+magenta+yellow)
+
+# Using variable `p`, calculate the probability of choosing any ball that is not cyan from the box
+1-p
+
+```
+
+`@sct`
+```{r}
+test_error()
+test_output_contains("0.8", incorrect_msg = "You are not providing a calculation that gives the correct answer. The sum of all probabilities equals 1.")
+success_msg("Good job! Let's work on the next question.")
+```
 
 ---type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 4. Probability of not cyan - generalized
 Write exercise that has coding to calculate this probability in general
 
----type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 5. Sampling without replacement
-Instead of taking just one draw, consider taking two draws. You take the second draw without returning the first draw to the box. We call this sampling without replacement. What is the probability that the first draw is cyan and that the second draw is not cyan?
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
+Instead of taking just one draw, consider taking two draws. You take the second draw without returning the first draw to the box. We call this sampling without replacement. 
+
+What is the probability that the first draw is cyan and that the second draw is not cyan?
+
+`@instructions`
+- Calculate the probability of choosing a ball that is not cyan after one cyan ball has been removed from the box.
+- Calculate probability of two sequential actions occuring: choosing a cyan ball on the first draw and a ball that is not cyan on the second draw.
+
+`@hint`
+- In a scenario where you sample without replacement, the number of balls decreases after the first draw.
+- The probability of selecting a ball that is not cyan on the second draw depends on whether or not you removed a cyan ball on the first draw.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# The variable `p_1` is the probability of choosing a cyan ball from the box on the first draw.
+p_1 <- cyan/(cyan+magenta+yellow)
+
+# Assign a variable `p_2` as the probability of not choosing a cyan ball on the second draw without replacement.
+
+# Calculate the probability that the first draw is cyan and the second draw is not cyan.
+
+```
+
+`@solution`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# The variable `p_1` is the probability of choosing a cyan ball from the box on the first draw.
+p_1 <- cyan/(cyan+magenta+yellow)
+
+# Assign a variable `p_2` as the probability of not choosing a cyan ball on the second draw without replacement.
+p_2 <- 1-(cyan-1)/(cyan+magenta+yellow-1)
+
+# Calculate the probability that the first draw is cyan and the second draw is not cyan.
+p_1*p_2
+
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p_2", incorrect_msg = "Make sure that you use `p_2` as your variable name for the probability of not choosing a cyan ball on the second draw when the first ball was cyan.")
+test_output_contains("0.1714286", incorrect_msg = "You are not providing a calculation that gives the correct answer. Multiply probabilities to calculate the probability that they occur in sequence.")
+success_msg("Great! Let's work on another problem.")
+```
 
 ---type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 6. Sampling without replacement - generalized
 Write exercise that has coding to calculate this probability in general
 
----type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 7. Sampling with replacement
-Now repeat the experiment, but this time, after taking the first draw and recording the color, return it back to the box and shake the box. We call this sampling with replacement. What is the probability that the first draw is cyan and that the second draw is not cyan?
+
+```yaml
+type: NormalExercise
+lang: r
+xp: 100
+skills: 1
+```
+
+Now repeat the experiment, but this time, after taking the first draw and recording the color, return it back to the box and shake the box. We call this sampling with replacement. 
+
+What is the probability that the first draw is cyan and that the second draw is not cyan?
+
+`@instructions`
+- Calculate probability of two independent actions occuring: choosing a cyan ball on the first draw and a ball that is not cyan on the second draw, after replacing the first ball.
+
+`@hint`
+- The probabilities of drawing a cyan ball and then a ball that is not cyan are independent.
+
+`@pre_exercise_code`
+```{r}
+# no pec
+```
+
+`@sample_code`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# The variable 'p_1' is the probability of choosing a cyan ball from the box on the first draw.
+p_1 <- cyan/(cyan+magenta+yellow)
+
+# Assign a variable 'p_2' as the probability of not choosing a cyan ball on the second draw with replacement.
+
+# Calculate the probability that the first draw is cyan and the second draw is not cyan.
+
+```
+
+`@solution`
+```{r}
+cyan <- 3
+magenta <- 5
+yellow <- 7
+
+# The variable 'p_1' is the probability of choosing a cyan ball from the box on the first draw.
+p_1 <- cyan/(cyan+magenta+yellow)
+
+# Assign a variable 'p_2' as the probability of not choosing a cyan ball on the second draw with replacement.
+p_2 <- 1-(cyan)/(cyan+magenta+yellow)
+
+# Calculate the probability that the first draw is cyan and the second draw is not cyan.
+p_1*p_2
+
+```
+
+`@sct`
+```{r}
+test_error()
+test_object("p_2", incorrect_msg = "Make sure that you use `p_2` as your variable name for the probability of not choosing a cyan ball on the second draw after the first drawn ball was returned to the box.")
+test_output_contains("0.16", incorrect_msg = "You are not providing a calculation that gives the correct answer. Multiply independent probabilities to calculate the probability that they occur in sequence.")
+success_msg("Great work!")
+```
 
 ---type:NormalExercise lang:r xp:100 skills:1
 ## Exercise 8. Sampling with replacement - generalized
